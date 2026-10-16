@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+*.log
+current_batch.json
+review_queue.json
+.env
