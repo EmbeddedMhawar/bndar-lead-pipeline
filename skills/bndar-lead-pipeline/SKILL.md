@@ -32,6 +32,9 @@ It enforces a zero-broker policy, Airbtics-backed revenue tiering, automated CRM
        └─► Kept tabs     ──► Automatically approved + coastal gem re-tagging
        │
        ▼
+[Fact-Check & Ground-Truth]► Compares text against metadata; removes expired ([EXPIRÉ])
+       │
+       ▼
 [Zero-Duplicate Audit]   ──► Multi-level phone collision verification (100% unique)
 ```
 
@@ -125,7 +128,32 @@ To prevent reviewer fatigue and ensure 100% human verification:
 
 ---
 
-## 6. Zero-Duplicate Audit Protocol
+## 6. Post-Approval Fact-Checking & Ground-Truthing Workflow
+
+Once initial batch review is completed, approved leads undergo a systematic **10-at-a-time fact-checking audit** in BrowserOS Neo to verify their actual listing contents against portal metadata:
+
+### A. Location Ground-Truthing Rule
+Portal search metadata (Avito / Mubawab) frequently assigns inaccurate sectors (e.g. ads listed under generic *"Autre secteur"* or *"Aïn Chock"* that actually describe properties in **Tamaris**, **Sidi Rahal**, or **Angle Ghandi & Brahim Roudani**).
+> [!IMPORTANT]
+> **Ground-Truth Priority**: The explicit location cited in the ad's title and description text **strictly overrides** Avito or Mubawab category metadata. When an ad's text reveals a higher or more specific yield location, rename the lead with its true location (e.g. `[P1-4] Wa Die (Ghandi / Roudani)` or `[P1-1] Meryam Dabir (Dar Bouazza)`).
+
+### B. Expired Ads Protocol (`[EXPIRÉ]`)
+Portal ads frequently expire or get deactivated while staying in review queues:
+- **Mubawab Expiration Detection**: When an ad is deleted or expired, Mubawab issues an HTTP 301 redirect to the general category search page (`https://www.mubawab.ma/fr/sd/.../appartements-vacational`).
+- **Avito Deactivation Detection**: Pages containing banners such as *"Cette annonce a été supprimée ou n'est plus disponible"* or 404/410 status.
+- **Action**:
+  1. Update lead status in CRM to **`Non Qualifié`** via `POST /leads/<id>/status` with notes `"Annonce expirée sur le portail"`.
+  2. Prefix the lead's name with **`[EXPIRÉ]`** (e.g., `[EXPIRÉ] [P3-11] Dounia`).
+
+### C. Competitor & Foreign Protocol (`[IGNORÉ]`)
+The tag **`[IGNORÉ]`** is strictly reserved for listings that are still active online but disqualified for business policy reasons:
+- **Competitor Conciergeries**: Any listing revealing a management company (e.g. *Happy Key*, *StayHere*, *Key Maroc*).
+- **Out-of-Scope**: Listings in other countries (e.g. Spain), non-residential services (e.g. transport-only services), or broker accounts that slipped through initial filters.
+- **Action**: Set status to **`Non Qualifié`** and prefix with **`[IGNORÉ]`** (e.g., `[IGNORÉ] [P1-2] abass anass (Happy Key)`).
+
+---
+
+## 7. Zero-Duplicate Audit Protocol
 
 Before finishing a lead campaign, execute a two-level collision audit:
 1. **Indicatif Normalization**: Strip spaces, hyphens, and convert `+212...` or `00212...` to national format `06...` / `07...`.
@@ -134,10 +162,11 @@ Before finishing a lead campaign, execute a two-level collision audit:
 
 ---
 
-## 7. Safety Rules & Gotchas
+## 8. Safety Rules & Gotchas
 
 > [!CAUTION]
 > **Form Targeting Safety**: In the CRM, `document.querySelector("form")` on lead pages often targets `/logout` (which will terminate the session). Always explicitly target `form#leadForm` or `form[action*="/leads"]`.
 
 > [!WARNING]
 > **Permission Limitations**: Standard CRM credentials may return `403 Forbidden` on `DELETE /leads/<id>`. Lead rejection must be executed via `POST /leads/<id>/status` with `status: "Non Qualifié"`. This safely archives the lead away from the default active pipeline.
+

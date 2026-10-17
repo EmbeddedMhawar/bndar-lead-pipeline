@@ -70,3 +70,18 @@ await fetch(`/leads/${leadId}/status`, { method: "POST", body: fd });
 2. **Backend Permission Handling**:
    * Regular agents do not have permission to execute `DELETE /leads/<id>` (`403 Forbidden: Seul le super administrateur peut supprimer un lead`).
    * Clean pipeline disqualification must be done by switching status to `Non Qualifié`.
+
+---
+
+## 5. Disqualification Tagging Conventions (`[EXPIRÉ]` vs `[IGNORÉ]`)
+
+When a lead is disqualified, its status is changed to `Non Qualifié` and its name in the CRM is updated to reflect the reason:
+
+1. **`[EXPIRÉ]` (Expired Listings)**:
+   * **Trigger**: Ad expired or deleted on the portal (Mubawab 301-redirect to `/sd/...`, or Avito deactivated banner).
+   * **Action**: `POST /leads/<id>/status` with `status: "Non Qualifié"` and notes `"Annonce expirée sur le portail"`, then update `nom_complet` via `/leads/<id>/edit` to `[EXPIRÉ] [P...] Nom`.
+
+2. **`[IGNORÉ]` (Competitor / Foreign / Out-of-Scope)**:
+   * **Trigger**: Ad is active online, but belongs to a competitor conciergerie (e.g. *Happy Key*), is in a foreign country (e.g. Spain), or is not a residential vacation property (e.g. transport service only).
+   * **Action**: `POST /leads/<id>/status` with `status: "Non Qualifié"`, then update `nom_complet` via `/leads/<id>/edit` to `[IGNORÉ] [P...] Nom (Raison)`.
+
