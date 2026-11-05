@@ -1,0 +1,16 @@
+{
+  "11599": {
+    "crm_id": "11599",
+    "nom": "Karima",
+    "status": "Pas répondu relance 1",
+    "touchpoint": "whatsapp",
+    "note": "Vocal 11.9s envoyé"
+  },
+  "11414": {
+    "crm_id": "11414",
+    "nom": "Jdb Mounir",
+    "status": "Non Qualifié",
+    "touchpoint": "whatsapp",
+    "note": "Pris par une autre conciergerie"
+  }
+}
