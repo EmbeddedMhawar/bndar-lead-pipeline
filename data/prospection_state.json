@@ -1,10 +1,31 @@
 {
   "11599": {
-    "crm_id": "11599",
+    "crm_id": "12343",
     "nom": "Karima",
     "status": "Pas répondu relance 1",
     "touchpoint": "whatsapp",
-    "note": "Vocal 11.9s envoyé"
+    "note": "Vocal 11.9s envoyé",
+    "phone": "0668237608",
+    "quartier": "Maârif côté Twin Center",
+    "type_bien": "le studio",
+    "initial_approach": "NAME_TOSS",
+    "relance_count": 0,
+    "next_due": "Aujourd hui",
+    "listing_url": "https://www.avito.ma/fr/maarif/appartements/Studio_Airbnb_Maarif_Casablanca_55971331.htm",
+    "history": [
+      {
+        "timestamp": "2026-11-04 20:47",
+        "action": "Vocal 11.9s envoyé (Name Toss)",
+        "note": "Initial WhatsApp voice note"
+      }
+    ],
+    "prep_checklist": {
+      "listing_audited": true,
+      "photos_enhanced": false,
+      "revenue_benchmark_ready": false,
+      "3_optimization_points_ready": false
+    },
+    "pending_script": null
   },
   "11414": {
     "crm_id": "11414",
@@ -12,5 +33,39 @@
     "status": "Non Qualifié",
     "touchpoint": "whatsapp",
     "note": "Pris par une autre conciergerie"
+  },
+  "12353": {
+    "crm_id": "12353",
+    "status": "Non Qualifié",
+    "note": "Déjà sous contrat avec une autre conciergerie - Rappel dans 3-6 mois"
+  },
+  "12354": {
+    "crm_id": "12354",
+    "status": "Nouveau",
+    "note": "Ajouté au CRM - Prêt pour vocal",
+    "phone": "0684257794",
+    "nom": "Simo S",
+    "quartier": "Maârif",
+    "type_bien": "le studio",
+    "initial_approach": "AUDIT_HOOK",
+    "listing_url": "https://www.avito.ma/fr/maarif/appartements/Appartement_à_louer_47_m²_à_Casablanca_56150204.htm"
+  },
+  "57178075": {
+    "crm_id": "57178075",
+    "status": "Non Qualifié",
+    "note": "Retiré par l'utilisateur",
+    "phone": "0650871509",
+    "nom": "Abdelmoughit"
+  },
+  "12356": {
+    "crm_id": "12356",
+    "status": "Nouveau",
+    "note": "Ajouté au CRM - Prêt pour vocal WhatsApp",
+    "phone": "33760188340",
+    "nom": "Inconnu (Bourgogne Corniche)",
+    "quartier": "Bourgogne sur la Corniche côté Mosquée Hassan II",
+    "type_bien": "l'appartement",
+    "initial_approach": "AUDIT_HOOK",
+    "listing_url": "https://www.avito.ma/fr/bourgogne/appartements/Appartement_sur_la_corniche_de_Casablanca_57212107.htm"
   }
 }
